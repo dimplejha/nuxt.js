@@ -5,7 +5,8 @@
     <header>
         <ul class="flex bg-red-600">
   <li class="mr-6">
-    <a class="text-blue-500 hover:text-blue-800" NuxtLink to="/home">Home</a>
+    <!-- <a class="text-blue-500 hover:text-blue-800" NuxtLink to="/home">Home</a> -->
+    <NuxtLink to="/home">home</NuxtLink>
   </li>
   <li class="mr-6">
     <a class="text-blue-500 hover:text-blue-800" NuxtLink to="/user">Users</a>
@@ -48,7 +49,7 @@
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="name"
-        aria-describedby="emailHelp" placeholder="Enter name">
+        aria-describedby="emailHelp" v-model="user.name"  placeholder="Enter name">
       
     </div>
 
@@ -60,7 +61,7 @@
     
     <div class="form-group mb-6">
       <label for="exampleInputPassword1" class="form-label inline-block mb-2 text-gray-700">Email</label>
-      <input type="Email" class="form-control block
+      <input type="user.Email" class="form-control block
         w-full
         px-3
         py-1.5
@@ -73,7 +74,7 @@
         transition
         ease-in-out
         m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="Email"
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="Email" v-model="user.email"
         placeholder="Email">
     </div>
 
@@ -94,7 +95,7 @@
         transition
         ease-in-out
         m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="Phone no"
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="Phone no" v-model="user.phone"
         placeholder="Phone no">
     </div>
 
@@ -115,6 +116,7 @@
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="State"
+        v-model="user.state"
         placeholder="State">
     </div>
 
@@ -135,7 +137,7 @@
         transition
         ease-in-out
         m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="Gender"
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="Gender" v-model="user.gender"
         placeholder="Gender">
     </div>
 
@@ -161,28 +163,37 @@
       active:bg-blue-800 active:shadow-lg
       transition
       duration-150
-      ease-in-out">Submit</button>
+      ease-in-out" v-on:click="submitValues()">Submit</button>
   </form>
 
   <td >
                 <table class="list" id="employeeList" >
                     <thead>
                         <tr class="border-2 border-black">
-                            <th class="border-2 border-black p-2">Full Name</th>
-                            <th class="border-2 border-black p-2">EMP Code</th>
-                            <th class="border-2 border-black p-2">Salary</th>
-                            <th class="border-2 border-black p-2">City</th>
-                            <!-- <th class="border-2 border-black p-2">Edit</th>
-                            <th class="border-2 border-black p-2">Delete </th> -->
+                            <th class="border-2 border-black p-2">Name</th>
+                            <th class="border-2 border-black p-2">Email</th>
+                            <th class="border-2 border-black p-2">Phone</th>
+                            <th class="border-2 border-black p-2">State</th>
+                                                        <th class="border-2 border-black p-2">Gender</th>
 
-                            <th ></th>
+                           <!-- <th class="border-2 border-black p-2">Edit</th>
+                            <th class="border-2 border-black p-2">Delete </th> -->
+                            
+                        </tr>
+                        <tr v-for="item in users" :key="item">
+                         <td>{{item.name}}</td>
+                          <td>{{item.email}}</td>
+                           <td>{{item.phone}}</td>
+                            <td>{{item.state}}</td>
+                                                        <td>{{item.gender}}</td>
+
                         </tr>
                     </thead>
                     <tbody>
 
                     </tbody>
                 </table>
-            </td>
+            </td> 
 </div></div></section>
 
 
@@ -205,10 +216,6 @@
             <a href="#" class="hover:underline">Contact</a>
         </li>
     </ul>
-
-
-
-    
  
 </footer>
 
@@ -224,11 +231,42 @@
 
 </template>
 
-
-
-
-
 <script>
+
+export default {
+ name:"index",
+ data(){
+  return{
+    users:[],
+    user:{
+      name:'',
+      email:null,
+      phone:null,
+      state:null,
+      gender:null
+    }
+  }
+ },
+ methods:{
+   submitValues(){
+    
+
+    console.log("submit"),
+    this.users.push(this.user);
+    console.log(this.user)
+  }
+ }
+}
+</script>
+
+
+
+
+
+
+
+
+
 
 
 
