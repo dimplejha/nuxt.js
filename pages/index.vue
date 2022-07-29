@@ -176,16 +176,19 @@
                             <th class="border-2 border-black p-2">State</th>
                                                         <th class="border-2 border-black p-2">Gender</th>
 
-                           <!-- <th class="border-2 border-black p-2">Edit</th>
-                            <th class="border-2 border-black p-2">Delete </th> -->
+                           <th colspan="2">Action</th>
+                          
+
                             
                         </tr>
-                        <tr v-for="item in users" :key="item">
+                        <tr v-for="(item,index) in users" :key="item">
                          <td>{{item.name}}</td>
                           <td>{{item.email}}</td>
                            <td>{{item.phone}}</td>
                             <td>{{item.state}}</td>
                                                         <td>{{item.gender}}</td>
+                                                         <th><button class="border-2 border-black p-2">Edit</button></th>
+                           <th><button  class="border-2 border-black p-2" v-on:click="DeleteValues(index)">Delete</button></th>
 
                         </tr>
                     </thead>
@@ -253,9 +256,23 @@ export default {
 
     console.log("submit"),
     this.users.push(this.user);
+    this.user={
+      name:'',
+      email:'',
+      phone:'',
+      state:'',
+      gender:''
+    }
     console.log(this.user)
+  },
+  DeleteValues(index){
+    this.users.splice(index,1);
   }
+
+
  }
+
+  
 }
 </script>
 
